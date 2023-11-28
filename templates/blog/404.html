@@ -1,0 +1,19 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block 'title' %}not found{% endblock 'title' %}
+{% block 'content' %}
+
+<html>
+<body>
+    <div style="text-align: center;">
+        <br><br><br><h3 style="color: #1de67b;font-size: 25" align = 'center'">ما داریم زحمت میکشیم بی فانوس صفحه پیدا نشد</h3>
+        <img src = "/static/assets/img/404.jpg" style="display: block; margin: 0 auto;color: rgb(95, 23, 219);font-size: 25 ; width: 170; height: 150 "></img>
+    <a href={% url 'root:home' %}>
+        <br><button type="submit" style="background-color: #0d0e0b; color: #ffff00; padding: 10px 20px; border: 3px; border-radius: 5px; cursor: pointer;" >back to home</button>
+    </a>
+    </div>
+</body>
+</html>
+
+
+{% endblock 'content' %}
