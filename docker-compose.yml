@@ -3,7 +3,7 @@ version: "3.8"
 services:
  backend:
   build: .
-  container_name: First-TeamWork
+  container_name: Firstteam
   command: python manage.py runserver 0.0.0.0:8000
   volumes:
    - .:/core
