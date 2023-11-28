@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'content' %}
+
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>Blog</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Blog</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 posts-list">
+          {% for post in posts %}
+          <div class="col-xl-4 col-md-6">
+            <article>
+
+              <div class="post-img">
+                <img src={{post.image.url}} alt="" class="img-fluid">
+              </div>
+              {% for cat in post.category.all %}
+              <p class="post-category">Category : {{cat.name}}</p>
+              {% endfor %}
+              <a href="{% url 'blogs:blog_single' pid=post.id %}"><h2 class="title">
+                {{post.title}}
+              </h2>
+              </a>
+              
+
+              <div class="d-flex align-items-center">
+                <img src={{post.auther_img.url}}  alt="" class="img-fluid post-author-img flex-shrink-0">
+                <div class="post-meta">
+                  <p class="post-author-list">{{post.author}}</p>
+                  <p class="post-date">
+                    <time datetime="2022-01-01">{{post.created_date|date:"D d M Y"}}</time>
+                  </p>
+                </div>
+              </div>
+
+            </article>
+          </div><!-- End post list item -->
+          {% endfor %}
+        </div><!-- End blog posts list -->
+
+        <div  align="center">
+          {% if posts.has_previous and not posts.has_next %}
+            <span class="step-links">
+              <h3 style="display: inline-block; color: rgb(243, 228, 21);"><a><active>{{posts.previous_page_number}}</a></h3>
+              <h3 style="display: inline-block;"><a href="?page={{ posts.previous_page_number }}"><<</a></h3>
+              <h1 style="display: inline-block; color: chartreuse;"><a><active>{{posts.number}}</a></h1>
+              
+            </span>
+          {% endif %}
+          
+          {% if not posts.has_previous and posts.has_next %}
+            <span class="step-links">
+              <h1 style="display: inline-block; color: chartreuse;"><a><active>{{posts.number}}</a></h1>
+              <h3 style="display: inline-block;"><a href="?page={{ posts.next_page_number }}">>></a></h3>
+              <h3 style="display: inline-block; color: rgb(243, 228, 21);"><a><active>{{posts.next_page_number}}</a></h3>
+              
+            </span>
+          {% endif %}
+          
+          {% if posts.has_previous and posts.has_next %}
+            <span class="step-links">
+              <h3 style="display: inline-block; color: rgb(243, 228, 21);"><a><active>{{posts.previous_page_number}}</a></h3>
+              <h3 style="display: inline-block;"><a href="?page={{ posts.previous_page_number }}"><<</a></h3>
+              <h1 style="display: inline-block; color: chartreuse;"><a><active>{{posts.number}}</a></h1>
+              <h3 style="display: inline-block;"><a href="?page={{ posts.next_page_number }}">>></a></h3>
+              <h3 style="display: inline-block; color: rgb(243, 228, 21);"><a><active>{{posts.next_page_number}}</a></h3>
+            </span>
+          {% endif %}
+        </div>
+        
+        
+        
+
+      </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+  {% endblock 'content' %}
